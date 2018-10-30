@@ -1,37 +1,37 @@
 Técnicas, estratégias e receitas para criar-se uma __aplicação web moderna__ com __várias equipes__ usando __diferentes frameworks JavaScript__.
 
-## What are Micro Frontends?
+## O que são Micro Frontends?
 
-The term __Micro Frontends__ first came up in [ThoughtWorks Technology Radar](https://www.thoughtworks.com/radar/techniques/micro-frontends) at the end of 2016. It extends the concepts of micro services to the frontend world. The current trend is to build a feature-rich and powerful browser application, aka single page app, which sits on top of a micro service architecture. Over time the frontend layer, often developed by a separate team, grows and gets more difficult to maintain. That's what we call a [Frontend Monolith](https://www.youtube.com/watch?v=pU1gXA0rfwc).
+O termo __Micro Frontends__ primeiro surgiu no [ThoughtWorks Technology Radar](https://www.thoughtworks.com/radar/techniques/micro-frontends) ao final de 2016. Isso traz os conceitos de micro serviços para o mundo frontend. O atual trend é construir uma aplicação poderosa e rica em funcionalidades, aka aplicações <i>single page</i>, a qual está no topo de uma arquitetura de micro serviço. Ao passar do tempo, a camada de frontend, frequentemente desenvolvida por uma equipe desesperada, cresce and fica difícil de se manter. Isso é o que chamamos um [Frontend Monolítico](https://www.youtube.com/watch?v=pU1gXA0rfwc).
 
-The idea behind Micro Frontends is to think about a website or web app as __a composition of features__ which are owned by __independent teams__. Each team has a __distinct area of business__ or __mission__ it cares about and specialises in. A team is __cross functional__ and develops its features __end-to-end__, from database to user interface.
+A ideia por trás do __Micro Frontends__ é pensar sobre um website ou um web app como __uma composição de funcionalidades__, as quais são de responsabilidade de __equipes independentes__. Cada equipe tem uma __área da aplicação distinta__ ou __missão__ que ela é responsável e na qual é especialista. A equipe é __multi funcional__ e desenvolve suas funcionalidades __de ponta a ponta__, do banco de dados à interface de usuário.
 
-However, this idea is not new, in the past it went by the name of [Frontend Integration for Verticalised Systems](https://dev.otto.de/2014/07/29/scaling-with-microservices-and-vertical-decomposition/) or [Self-contained Systems](http://scs-architecture.org/). But Micro Frontends is clearly a more friendly and less bulky term.
+Contudo, a ideia não é nova, no passado ela se deu pelo nome de [Integração Frontend para Sistemas Verticalizados](https://dev.otto.de/2014/07/29/scaling-with-microservices-and-vertical-decomposition/) ou [Sistemas Auto-contidos](http://scs-architecture.org/). Mas __Micro Frontends__ é um termo claramente mais amigável e menos volumoso.
 
-__Monolithic Frontends__
+__Frontend Monolítico__
 ![Monolithic Frontends](./ressources/diagrams/organisational/monolith-frontback-microservices.png)
 
 
-__Organisation in Verticals__
+__Organização em Verticais__
 ![End-To-End Teams with Micro Frontends](./ressources/diagrams/organisational/verticals-headline.png)
 
-## What's a Modern Web App?
+## O que é um Web App Moderno?
 
-In the introduction I've used the phrase "building a modern web app". Let's define the assumptions that are connected with this term.
+Na introdução foi usada a frase "criar-se uma aplicação web moderna". Vamos denifir as suposições relacionadas com o termo.
 
-To put this into a broader perspective, [Aral Balkan](https://ar.al/) has written a blog post about what he calls the [Documents‐to‐Applications Continuum](https://ar.al/notes/the-documents-to-applications-continuum/). He comes up with the concept of a sliding scale where a site, built out of __static documents__, connected via links, is __on the left__ end and a pure behaviour driven, __contentless application__ like an online photo editor is __on the right__.
+Para colocar isso em uma perspectiva mais ampla, [Aral Balkan](https://ar.al/) escreveu um post sobre o que ele chama de [A Continuidade de Sites para Aplicações](https://ar.al/notes/the-documents-to-applications-continuum/). Ele traz o conceito de uma escala móvel, onde um site, constituído apenas de __documentos estáticos__, conecatado via links, está no início da escala, enquanto uma __aplicação sem conteúdo__, puramente guiada pelo comportamento, como um editor de fotos online está ao fim.
 
-If you would position your project on the __left side of this spectrum__, an __integration on webserver level__ is a good fit. With this model a server collects and __concatenates HTML strings__ from all components that make up the page requested by the user. Updates are done by reloading the page from the server or replacing parts of it via ajax. [Gustaf Nilsson Kotte](https://twitter.com/gustaf_nk/) has written a [comprehensive article](https://gustafnk.github.io/microservice-websites/) on this topic.
+Se você posicionasse seu projeto à __esquerda dessa escala__, uma __integração no servidor web__ é uma boa decisão. Com esse movelo, o servidor coleta e __concatena strings HTML__ de todos os components que constituem a página requisitada pela pessoa usuária do seu site. Atualizações são feitas ao recarregar a página do servidor ou substituindo partes dela via ajax. [Gustaf Nilsson Kotte](https://twitter.com/gustaf_nk/) escreveu um artigo abrangente sobre esse tópico.
 
-When your user interface has to provide __instant feedback__, even on unreliable connections, a pure server rendered site is not sufficient anymore. To implement techniques like [Optimistic UI](https://www.smashingmagazine.com/2016/11/true-lies-of-optimistic-user-interfaces/) or [Skeleton Screens](http://www.lukew.com/ff/entry.asp?1797) you need to be able to also __update__ your UI __on the device itself__. Google's term [Progressive Web Apps](https://developers.google.com/web/progressive-web-apps/) aptly describes the __balancing act__ of being a good citizen of the web (progressive enhancement) while also providing app-like performance. This kind of application is located somewhere __around the middle of the site-app-continuum__. Here a solely server based solution is not sufficient anymore. We have to move the __integration into the browser__, and this is the focus of this article.
+Quando sua interface de usuário precisa oferecer __feedback instantâneo__, mesmo sob conexões fracas, um site completamente renderizado pelo servidor não é mais o suficiente. Para implementar técnicas como [UI Otimista](https://www.smashingmagazine.com/2016/11/true-lies-of-optimistic-user-interfaces/) ou [Telas-esqueleto](http://www.lukew.com/ff/entry.asp?1797) você também precisa __atualizaar__ sua UI __no próprio dispositivo__. O termo [Aplicações Web Progressivas](https://developers.google.com/web/progressive-web-apps/) do Google descreve apropriadamente o __ato de equilíbrio__ entre ser uma boa pessoa cidadã da web (melhoria progressiva) e, ao mesmo tempo, oferecer uma performance semelhante a de um aplicativo. Esse tipo de aplicação é localizada em algum lugar no meio da escala de __continuidade de sites para aplicações__. Nesse caso uma solução baseada unicamente em servidor não mais suficiente. Precisamos mudar a __integração para o navegador__, e esse é foco deste artigo.
 
-## Core Ideas behind Micro Frontends
+## Ideias Básicas Por Trás do Micro Frontends
 
-* __Be Technology Agnostic__<br>Each team should be able to choose and upgrade their stack without having to coordinate with other teams. [Custom Elements](#the-dom-is-the-api) are a great way to hide implementation details while providing a neutral interface to others.
-* __Isolate Team Code__<br>Don’t share a runtime, even if all teams use the same framework. Build independent apps that are self contained. Don't rely on shared state or global variables.
-* __Establish Team Prefixes__<br>Agree on naming conventions where isolation is not possible yet. Namespace CSS, Events, Local Storage and Cookies to avoid collisions and clarify ownership.
-* __Favor Native Browser Features over Custom APIs__<br>Use [Browser Events for communication](#parent-child-communication--dom-modification) instead of building a global PubSub system. If you really have to build a cross team API, try keeping it as simple as possible.
-* __Build a Resilient Site__<br>Your feature should be useful, even if JavaScript failed or hasn't executed yet. Use [Universal Rendering](#serverside-rendering--universal-rendering) and Progressive Enhancement to improve perceived performance.
+* __Agnóstico em Tecnologia__<br>Cada equipe deve ser capaz de escolher e atualizar suas ferramentas de bibliotecas de código sem ter que coordenar outras equipes. [Elementos Customizados](#the-dom-is-the-api) são uma boa maneira de esconder os detalhes de implementação e, ao mesmo tempo, fornecer uma interface neutra para as outras pessoas.
+* __Isole o Código da Equipe__<br>Não compartilhe um runtime, mesmo se todas as equipes usam o mesmo framework. Desenvolva aplicações independentes e que sejam auto-contidas. Não dependa de estado compartilhado ou variáveis globais.
+* __Estabeleça os Prefixos da Equipe__<br>Concorde em convenções de nomenclatura onde isolamento ainda não é possível. Crie namespace para CSS, Eventos, Local Storage e Cookies para evitar colisões e deixar explícito propriedade e responsabilidade.
+* __Favoreça Funcionalidades Nativas do Navegador sobre APIs Customizadas__<br>Use [Eventos do Navegador para comunicação](#parent-child-communication--dom-modification) ao invés de criar um sistema global de PubSub. Se você realmente, precisa criar uma API para todas as equipes, tente manter isso o mais simples possível.
+* __Crie um Site Resiliente__<br>Sua funcionalidade deve ser útil, mesmo se o JavaScript falhou ou se ainda não foi executado. Use [Renderização Universal](#serverside-rendering--universal-rendering) e Melhoria Progressiva para melhorar performance.
 
 ---
 
