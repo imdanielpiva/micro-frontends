@@ -27,7 +27,7 @@ Quando sua interface de usuário precisa oferecer __feedback instantâneo__, mes
 
 ## Ideias Básicas Por Trás do Micro Frontends
 
-* __Agnóstico em Tecnologia__<br>Cada equipe deve ser capaz de escolher e atualizar suas ferramentas de bibliotecas de código sem ter que coordenar outras equipes. [Elementos Customizados](#the-dom-is-the-api) são uma boa maneira de esconder os detalhes de implementação e, ao mesmo tempo, fornecer uma interface neutra para as outras pessoas.
+* __Seja Agnóstico em Tecnologia__<br>Cada equipe deve ser capaz de escolher e atualizar suas ferramentas de bibliotecas de código sem ter que coordenar outras equipes. [Elementos Customizados](#the-dom-is-the-api) são uma boa maneira de esconder os detalhes de implementação e, ao mesmo tempo, fornecer uma interface neutra para as outras pessoas.
 * __Isole o Código da Equipe__<br>Não compartilhe um runtime, mesmo se todas as equipes usam o mesmo framework. Desenvolva aplicações independentes e que sejam auto-contidas. Não dependa de estado compartilhado ou variáveis globais.
 * __Estabeleça os Prefixos da Equipe__<br>Concorde em convenções de nomenclatura onde isolamento ainda não é possível. Crie namespace para CSS, Eventos, Local Storage e Cookies para evitar colisões e deixar explícito propriedade e responsabilidade.
 * __Favoreça Funcionalidades Nativas do Navegador sobre APIs Customizadas__<br>Use [Eventos do Navegador para comunicação](#parent-child-communication--dom-modification) ao invés de criar um sistema global de PubSub. Se você realmente, precisa criar uma API para todas as equipes, tente manter isso o mais simples possível.
