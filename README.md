@@ -1,18 +1,21 @@
-# Micro Frontends
-**Extending the Microservice Paradigms to Web Development**
+# Micro Frontends [WIP]
+**Trazendo os paradigmas de micro-serviços para o desenvolvimento web.**
 
-The actual site can be found at [micro-frontends.org](https://micro-frontends.org/).
+O real site do projeto pode ser acessado em [micro-frontends.org](https://micro-frontends.org/).
 
-## Author
+## Autores
 
 Michael Geers [@naltatis](https://twitter.com/naltatis)
 
-## Contribute
+### Tradutor
+Daniel Piva (tradução)
 
-The site is hosted via Github Pages (see `index.md`).
-So feel free to contribute by submitting issues or pull requests.
+## Contribua
 
-## License
+<!-- The site is hosted via Github Pages (see `index.md`). -->
+Sinta-se livre para contribuir enviando issues ou pull requests.
+
+## Licença
 
 The MIT License
 
